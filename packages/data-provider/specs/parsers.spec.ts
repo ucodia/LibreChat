@@ -26,7 +26,6 @@ jest.mock('dayjs', () => {
   });
 
   mockDayjs.extend = jest.fn();
-  mockDayjs.locale = jest.fn();
 
   return mockDayjs;
 });
