@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import 'dayjs/locale/en';
 import type { ZodIssue } from 'zod';
 import type * as a from './types/assistants';
 import type * as s from './schemas';
@@ -17,6 +19,9 @@ import {
 } from './schemas';
 import { bedrockInputSchema } from './bedrock';
 import { alternateName } from './config';
+
+dayjs.extend(utc);
+dayjs.locale('en');
 
 type EndpointSchema =
   | typeof openAISchema
