@@ -23,7 +23,7 @@ jest.mock('dayjs', () => {
       );
     },
     toISOString: () => '2024-04-29T16:34:56.000Z',
-    valueOf: () => 1714405696000,
+    unix: () => 1714405696,
   });
 
   mockDayjs.extend = jest.fn();
