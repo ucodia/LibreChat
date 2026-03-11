@@ -23,6 +23,7 @@ jest.mock('dayjs', () => {
       );
     },
     toISOString: () => '2024-04-29T16:34:56.000Z',
+    valueOf: () => 1714405696000,
   });
 
   mockDayjs.extend = jest.fn();
@@ -60,6 +61,11 @@ describe('replaceSpecialVars', () => {
   test('should replace {{iso_datetime}} with the ISO datetime', () => {
     const result = replaceSpecialVars({ text: 'ISO time: {{iso_datetime}}' });
     expect(result).toBe('ISO time: 2024-04-29T16:34:56.000Z');
+  });
+
+  test('should replace {{current_timestamp}} with the Unix timestamp in seconds', () => {
+    const result = replaceSpecialVars({ text: 'Timestamp: {{current_timestamp}}' });
+    expect(result).toBe('Timestamp: 1714405696');
   });
 
   test('should replace {{current_user}} with the user name if provided', () => {
@@ -124,6 +130,7 @@ describe('replaceSpecialVars', () => {
     expect(result).toContain('2024-04-29 (Monday)'); // current_date
     expect(result).toContain('2024-04-29 12:34:56 -04:00 (Monday)'); // current_datetime
     expect(result).toContain('2024-04-29T16:34:56.000Z'); // iso_datetime
+    expect(result).toContain('1714405696'); // current_timestamp
     expect(result).toContain('Test User'); // current_user
   });
 });

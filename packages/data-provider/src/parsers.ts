@@ -420,6 +420,9 @@ export function replaceSpecialVars({ text, user }: { text: string; user?: t.TUse
   const isoDatetime = now.toISOString();
   result = result.replace(/{{iso_datetime}}/gi, isoDatetime);
 
+  const currentTimestamp = Math.floor(now.valueOf() / 1000);
+  result = result.replace(/{{current_timestamp}}/gi, String(currentTimestamp));
+
   if (user && user.name) {
     result = result.replace(/{{current_user}}/gi, user.name);
   }
